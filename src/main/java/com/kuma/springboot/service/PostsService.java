@@ -2,13 +2,16 @@ package com.kuma.springboot.service;
 
 import com.kuma.springboot.domain.posts.Posts;
 import com.kuma.springboot.domain.posts.PostsRepository;
+import com.kuma.springboot.web.dto.PostsListResponseDto;
 import com.kuma.springboot.web.dto.PostsResponseDto;
 import com.kuma.springboot.web.dto.PostsSaveRequestDto;
 import com.kuma.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -36,4 +39,11 @@ public class PostsService {
 
         return new PostsResponseDto(entity);
     }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList()) ;
+    }
+
+
 }
