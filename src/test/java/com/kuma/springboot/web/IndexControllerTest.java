@@ -20,8 +20,12 @@ public class IndexControllerTest {
     @Test
     public void 메인페이지_로딩() {
         String body = this.testRestTemplate.getForObject("/", String.class);
-
         assertThat(body).contains("스프링 부트입니다.");
+    }
 
+    @Test
+    public void 글쓰기페이지_로딩() {
+        String body = this.testRestTemplate.getForObject("/posts/save", String.class);
+        assertThat(body).contains("게시글 등록");
     }
 }
