@@ -4,9 +4,9 @@ import com.kuma.springboot.domain.posts.Posts;
 import com.kuma.springboot.domain.posts.PostsRepository;
 import com.kuma.springboot.web.dto.PostsSaveRequestDto;
 import com.kuma.springboot.web.dto.PostsUpdateRequestDto;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -21,7 +21,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PostsApiControllerTest {
 
@@ -34,12 +33,13 @@ public class PostsApiControllerTest {
     @Autowired
     private PostsRepository postsRepository;
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         postsRepository.deleteAll();
     }
 
     @Test
+    @DisplayName("Posts 등록")
     public void Posts_등록된다() throws Exception {
         String title = "title";
         String content = "content";
@@ -65,6 +65,7 @@ public class PostsApiControllerTest {
     }
 
     @Test
+    @DisplayName("Posts 수정")
     public void Posts_수정() throws Exception {
         Posts savesPosts = postsRepository.save(Posts.builder()
                     .title("title")

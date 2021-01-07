@@ -1,25 +1,23 @@
 package com.kuma.springboot.domain.posts;
 
-import org.assertj.core.api.LocalDateTimeAssert;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class PostsRepositoryTest {
 
     @Autowired
     PostsRepository postsRepository;
 
-    @After
+    @AfterEach
     public void cleanup() {
         postsRepository.deleteAll();
     }
@@ -43,6 +41,7 @@ public class PostsRepositoryTest {
     }
 
     @Test
+    @DisplayName("BasicTimeEntity_등록")
     public void BasicTimeEntity_등록() {
 
         LocalDateTime now = LocalDateTime.of(2019,6,4,0,0,0);
